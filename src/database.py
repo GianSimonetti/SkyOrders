@@ -17,7 +17,7 @@ DB_NAME = os.getenv("POSTGRES_DB")
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # 3 Crear el motor de conexión (engine)
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 
 # 4 Crear el SessionLocal (maneja las sesiones con la BD)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
