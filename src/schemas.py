@@ -1,5 +1,5 @@
-# src/schemas.py
 from pydantic import BaseModel, EmailStr
+#Validaciones con Pydantic
 
 class UserCreate(BaseModel):
     """
@@ -8,3 +8,21 @@ class UserCreate(BaseModel):
     """
     name: str
     email: EmailStr  # valida formato de correo
+
+class OrderCreate(BaseModel):
+    product: str
+    quantity: int
+    price: int
+    status: str = "pending"
+    user_id: int
+
+class OrderResponse(BaseModel):
+    id: int
+    product: str
+    quantity: int
+    price: int
+    status: str
+    user_id: int
+
+class Config:
+    orm_mode = True

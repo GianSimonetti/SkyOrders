@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from src.routers import users
+from src.routers import orders
 
 app = FastAPI(title="SkyOrders API")
 
@@ -11,3 +12,4 @@ def health_check():
     }
 
 app.include_router(users.router)
+app.include_router(orders.router)

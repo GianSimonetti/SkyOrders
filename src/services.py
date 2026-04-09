@@ -1,5 +1,7 @@
 from src.models import User
 from fastapi import HTTPException
+from src.models import Order
+from src.models import User 
 
 def get_users_service(db):
     return db.query(User).all()
@@ -45,3 +47,23 @@ def delete_user_service(db, user_id):
     db.commit()
 
     return {"message": "Usuario eliminado"}
+
+
+def create_order_service(db, order):
+    new_order = Order(
+        product=order.product,
+        quantity=order.quantity,
+        price=order.price,
+        status=order.status,
+        user_id=order.user_id
+    )
+
+    db.add(new_order)
+    db.commit()
+    db.refresh(new_order)
+
+    return new_order
+
+
+def get_orders_service(db):
+    return db.query(Order).all()
