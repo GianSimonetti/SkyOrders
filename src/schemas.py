@@ -8,6 +8,7 @@ class UserCreate(BaseModel):
     """
     name: str
     email: EmailStr  # valida formato de correo
+    password: str
 
 class OrderCreate(BaseModel):
     product: str
@@ -24,5 +25,26 @@ class OrderResponse(BaseModel):
     status: str
     user_id: int
 
-class Config:
-    orm_mode = True
+    class Config:
+        orm_mode = True
+
+class UserWithOrders(BaseModel):
+    id: int
+    name: str
+    email: str
+    orders: list[OrderResponse]
+
+    class Config:
+        from_attributes = True
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserResponse(BaseModel):
+    id: int
+    name: str
+    email: EmailStr
+
+    class Config:
+        from_attributes = True
